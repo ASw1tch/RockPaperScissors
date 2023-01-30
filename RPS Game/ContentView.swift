@@ -26,7 +26,8 @@ extension View {
 
 
 struct ContentView: View {
-    @State private var showScore = false
+    @State private var showingScore = false
+    @State private var showingPopText = false
     @State private var scoreCount = 0
     @State private var scoreTitle = ""
     
@@ -62,7 +63,7 @@ struct ContentView: View {
                 
                 
                 
-                Image(gameOptions[computerTurn]) //Надо обновляться тут
+                Image(gameOptions[computerTurn])
                     .renderingMode(.original)
                     .resizable()
                     .frame(width: 200, height: 200)
@@ -86,28 +87,26 @@ struct ContentView: View {
                     ForEach(0..<3) {number in
                         Button  {
                             figureTapped(number)
-                            
-                            
-                        }label: {
+                            showingScore = isScoreOver(limit: scoreCount)
+                        } label: {
                             Image(turnOptions[number])
                                 .renderingMode(.original)
                                 .resizable()
                                 .frame(width: 90, height: 90, alignment: .topLeading)
                                 .padding()
                         }
-                        
                     }
                 }
-                
             }
-            
         }
-        
+        .alert(scoreTitle, isPresented: $showingScore) {
+            Button("Continue", action: resetScore)
+        } message: {
+            Text("Game Over! Your score is \(scoreCount)")
+        }
     }
     
-    func computerMove() {
-        
-    }
+    
     
     func figureTapped(_ number: Int) {
         switch number {
@@ -116,6 +115,7 @@ struct ContentView: View {
             switch gameOptions[computerTurn] {
             case "rock":
                 print("Draw")
+                    
             case "paper":
                 print("Loser!")
                 scoreCount -= 1
@@ -159,10 +159,21 @@ struct ContentView: View {
         }
         
     }
-    
-    
-    func turnResults() {
+    func isScoreOver(limit: Int) -> Bool {
+        if scoreCount == -3  {
+            return true
+        }
+        if scoreCount == 3 {
+            return true
+        }
+        else {
+            return false
+        }
         
+    }
+    
+    func resetScore() {
+        scoreCount = 0
     }
 }
 
