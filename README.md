@@ -1,4 +1,4 @@
 # RockPaperScissors
 Rock Paper Scissors on SwiftUI
 
-<img src= "https://user-images.githubusercontent.com/108889662/196502927-06b73b44-4884-4194-9e4a-cc5a9b924353.png" width="320" height="720"> 
+<img src= "https://github.com/ASw1tch/RockPaperScissors/assets/108889662/bab4021a-1523-47fa-bdec-a0701e030bd7" width="320" height="720"> 
